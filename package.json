@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "cd server && nest start --watch server",
-    "client": "cd client && next dev",
+    "client": "cd client && npm run dev",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
