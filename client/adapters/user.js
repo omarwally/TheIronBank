@@ -1,17 +1,17 @@
 import apiService from "../services/apiService";
 import { useQuery, useQueryClient, useMutation } from "react-query";
 
-export function useFetchUser(userId) {
+export default function useFetchUser(userId) {
   return useQuery(["userData", userId], () =>
     apiService.get(`user/${userId}`).then(({ data }) => data)
   );
 }
 
-export function useMutateLoginUser() {
+export default function useMutateLoginUser() {
   return useMutation(
     (user) => {
       const data = new FormData();
-      data.append("giuEmail", user.giuEmail);
+      data.append("email", user.email);
       data.append("password", user.password);
       return apiService.post(`user/login`, data);
     },
@@ -26,27 +26,32 @@ export function useMutateLoginUser() {
 }
 
 
-export  function useMutateRegisterUser() {
+export default function useMutateRegisterUser() {
   return useMutation(
     (user) => {
-      return apiService.post(`http://localhost:3002/users/postt`, user);
+      const data = new FormData();
+      data.append("email", user.email);
+      data.append("password", user.password);
+      return apiService.post(`user/register`, data);
     },
     {
       // When mutate is called:
       onSuccess: (responseData) => {
         // Redirect to login page
-        window.location.replace("http://localhost:3000");
       },
-      onError: (e) => console.log(e.message), 
+      onError: (e) => console.log(e.message),
     }
   );
 }
 
-export  function useMutateUpdateUser(userId) {
+export default function useMutateUpdateUser(userId) {
   const queryClint = useQueryClient();
   return useMutation(
     (user) => {
-      return apiService.post(`user/${userId}`, user);
+      const data = new FormData();
+      data.append("email", user.email);
+      data.append("password", user.password);
+      return apiService.post(`user/${userId}`, data);
     },
     {
       // When mutate is called:
@@ -56,14 +61,8 @@ export  function useMutateUpdateUser(userId) {
           (data) => {
             return [
               {
-                giuEmail: responseData.data.body.giuEmail,
+                email: responseData.data.body.email,
                 password: responseData.data.body.password,
-                confirmPassword: responseData.data.body.confirmPassword,
-                name: responseData.data.body.name,
-                username: responseData.data.body.username,
-                phone: responseData.data.body.phone,
-                giuID: responseData.data.body.giuID,
-
               },
               ...data,
             ];
