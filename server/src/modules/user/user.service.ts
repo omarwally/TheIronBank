@@ -13,4 +13,8 @@ export class UserService {
   findAll(): Promise<User[]> {
     return this.userModel.find().exec();
   }
+  public async postUser(newUser) {
+    const user = await new this.userModel(newUser);
+    return user.save();
+  }
 }

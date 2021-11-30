@@ -1,6 +1,8 @@
-import { Controller, Get, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Request, UseGuards , Body,  ValidationPipe, HttpStatus} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UserService } from './user.service';
+import { User, UserDocument } from '@sp/schemas';
+
 
 @Controller('users')
 export class UserController {
@@ -22,5 +24,9 @@ export class UserController {
   @Get('list')
   users(): any {
     return this.userService.findAll();
+  }
+  @Post("postt")
+  public postUser(@Body() user: UserDocument) {
+    return this.userService.postUser(user);
   }
 }
