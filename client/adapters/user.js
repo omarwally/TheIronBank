@@ -1,17 +1,17 @@
 import apiService from "../services/apiService";
 import { useQuery, useQueryClient, useMutation } from "react-query";
 
-export default function useFetchUser(userId) {
+export function useFetchUser(userId) {
   return useQuery(["userData", userId], () =>
     apiService.get(`user/${userId}`).then(({ data }) => data)
   );
 }
 
-export default function useMutateLoginUser() {
+export function useMutateLoginUser() {
   return useMutation(
     (user) => {
       const data = new FormData();
-      data.append("email", user.email);
+      data.append("giuEmail", user.giuEmail);
       data.append("password", user.password);
       return apiService.post(`user/login`, data);
     },
@@ -26,32 +26,27 @@ export default function useMutateLoginUser() {
 }
 
 
-export default function useMutateRegisterUser() {
+export  function useMutateRegisterUser() {
   return useMutation(
     (user) => {
-      const data = new FormData();
-      data.append("email", user.email);
-      data.append("password", user.password);
-      return apiService.post(`user/register`, data);
+      return apiService.post(`http://localhost:3002/users/postt`, user);
     },
     {
       // When mutate is called:
       onSuccess: (responseData) => {
         // Redirect to login page
+        window.location.replace("http://localhost:3000");
       },
-      onError: (e) => console.log(e.message),
+      onError: (e) => console.log(e.message), 
     }
   );
 }
 
-export default function useMutateUpdateUser(userId) {
+export  function useMutateUpdateUser(userId) {
   const queryClint = useQueryClient();
   return useMutation(
     (user) => {
-      const data = new FormData();
-      data.append("email", user.email);
-      data.append("password", user.password);
-      return apiService.post(`user/${userId}`, data);
+      return apiService.post(`user/${userId}`, user);
     },
     {
       // When mutate is called:
@@ -61,8 +56,14 @@ export default function useMutateUpdateUser(userId) {
           (data) => {
             return [
               {
-                email: responseData.data.body.email,
+                giuEmail: responseData.data.body.giuEmail,
                 password: responseData.data.body.password,
+                confirmPassword: responseData.data.body.confirmPassword,
+                name: responseData.data.body.name,
+                username: responseData.data.body.username,
+                phone: responseData.data.body.phone,
+                giuID: responseData.data.body.giuID,
+
               },
               ...data,
             ];

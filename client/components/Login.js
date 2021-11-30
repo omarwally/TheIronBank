@@ -8,6 +8,7 @@ import {
 } from "reactstrap";
 import { useState } from "react";
 import styles from "../styles/Home.module.css";
+import { useMutateLoginUser } from "../adapters/user";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -40,6 +41,7 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Call User Login Adapter
+    // useMutateLoginUser({ email, password });
   };
 
   return (

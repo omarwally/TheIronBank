@@ -17,7 +17,21 @@ export class User {
   name: string;
 
   @Prop({ required: true })
-  email: string;
+  giuEmail: string;
+
+  @Prop({required: true})
+  username: string;
+
+  @Prop({required: true})
+  password: string;
+
+  @Prop({required: true})
+  giuID: number;
+
+  @Prop({required: true})
+  phone: string;
+
+
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
