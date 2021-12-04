@@ -5,16 +5,18 @@ import axios from "axios";
 
 function Transaction() {
   const [transactions, setTransactions] = useState([]);
-  const userr = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState([]);
+
   useEffect(() => {
-    axios.get("http://localhost:3002/transactions/list").then((response) => {
+    const userr = JSON.parse(localStorage.getItem("user"));
+    axios.get("http://localhost:3000/transactions/list").then((response) => {
       const data = response.data;
       setTransactions(data);
+      setUser(userr);
     });
   }, []);
-
   const result = transactions.filter((obj) => {
-    return obj.creditorId === userr.id;
+    return obj.creditorId === user.giuId;
   });
 
   return (
