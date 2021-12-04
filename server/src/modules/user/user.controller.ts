@@ -1,7 +1,7 @@
-import { Controller, Get, Param, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Request, UseGuards,Post,Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UserService } from './user.service';
-import { User } from '@sp/schemas';
+import { User , UserDocument } from '@sp/schemas';
 
 @Controller('user')
 export class UserController {
@@ -27,5 +27,11 @@ export class UserController {
     return this.userService.findByEmail(email);
     
   }
+
+  @Post("post")
+  public postUser(@Body() user: UserDocument) {
+    return this.userService.postUser(user);
+  }
+
 
 }

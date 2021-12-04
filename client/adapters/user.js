@@ -33,15 +33,13 @@ export function useMutateLoginUser() {
 export function useMutateRegisterUser() {
   return useMutation(
     (user) => {
-      const data = new FormData();
-      data.append("email", user.email);
-      data.append("password", user.password);
-      return apiService.post(`user/register`, data);
+      return apiService.post(`http://localhost:3000/user/post`, user);
     },
     {
       // When mutate is called:
       onSuccess: (responseData) => {
         // Redirect to login page
+        window.location.replace("http://localhost:3001");
       },
       onError: (e) => console.log(e.message),
     }
@@ -52,10 +50,7 @@ export function useMutateUpdateUser(userId) {
   const queryClint = useQueryClient();
   return useMutation(
     (user) => {
-      const data = new FormData();
-      data.append("email", user.email);
-      data.append("password", user.password);
-      return apiService.post(`user/${userId}`, data);
+      return apiService.post(`user/${userId}`, user);
     },
     {
       // When mutate is called:
@@ -65,8 +60,14 @@ export function useMutateUpdateUser(userId) {
           (data) => {
             return [
               {
-                email: responseData.data.body.email,
+                giuEmail: responseData.data.body.giuEmail,
                 password: responseData.data.body.password,
+                confirmPassword: responseData.data.body.confirmPassword,
+                name: responseData.data.body.name,
+                username: responseData.data.body.username,
+                phone: responseData.data.body.phone,
+                giuID: responseData.data.body.giuID,
+
               },
               ...data,
             ];
