@@ -1,7 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, ExtractJwt } from 'passport-jwt';
-
+import * as dotenv from 'dotenv';
+dotenv.config();
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
   constructor() {
@@ -11,12 +12,17 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
       secretOrKey: process.env.JWT_SECRET,
     });
   }
-  /**
+ 
+
+   /**
    * Determines if the user JWT token is valid.
    * On successfull validation, returns jwt payload (assigned to req.user)
    * @param payload
    */
   async validate(payload: any) {
+
+    
+    
     /*
       Each JWT has a "payload" section, which includes 
       the data we insert into the JWT object when
@@ -30,6 +36,9 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
       on the Express HTTP Request object and assign whatever 
       is returned here to req.user
     */
-    return payload;
+
+
+      
+      return payload;
   }
 }

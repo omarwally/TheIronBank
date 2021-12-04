@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post ,Response } from '@nestjs/common';
 import { AuthDto } from './dtos/auth.dto';
 import { AuthService } from './auth.service';
 
@@ -10,8 +10,17 @@ export class AuthController {
    * API endpoint handler for user login
    * @param dto
    */
-  @Post('/login')
-  login(@Body() dto: AuthDto) {
-    // TODO: Add your login logic here
+  @Post('/login',)
+  login(@Body() dto: AuthDto,  @Response() res) {
+    
+    const token=this.authService.login(dto,res)
+    //res.cookie('token', token)
+    //return res.send(token);
+    return token;
+    
   }
+
+
+
+  
 }

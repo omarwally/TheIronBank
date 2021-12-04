@@ -6,7 +6,7 @@ const baseUrl = process.env.REACT_APP_API_URL;
 axios.interceptors.request.use(
   function (config) {
     const accessToken =
-      localStorage.getItem("jwt") && JSON.parse(localStorage.getItem("jwt"));
+      localStorage.getItem("jwt");
     const headers = {
       Accept: "application/json",
       "Content-Type": "application/json",
