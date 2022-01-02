@@ -11,8 +11,8 @@ export class TransactionService {
     private TransactionModel: Model<TransactionDocument>
   ) {}
 
-  public async getTransaction(id: number): Promise<any> {
-    const trans = await this.TransactionModel.findOne({ id }).exec();
+  public async getTransaction(id: string): Promise<any> {
+    const trans = await this.TransactionModel.find({transactionId:id  }).exec();
     if (!trans) {
       throw new HttpException("Not Found", 404);
     } else {

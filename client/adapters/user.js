@@ -30,6 +30,28 @@ export function useMutateLoginUser() {
   );
 }
 
+export function useMutateCreatAccount() {
+  return useMutation(
+    (acc) => {
+
+      return axios.post('http://localhost:3000/account/post', acc);
+    },
+    {
+      // When mutate is called:
+      onSuccess: (responseData) => {
+
+      },
+      onError: (e) => console.log(e.message),
+    }
+  );
+}
+
+export function usegetTransactions(transactionId) {
+  return axios.get(`http://localhost:3000/transactions/${userId}`).then(({ data }) => data)
+
+}
+
+
 export function useMutateRegisterUser() {
   return useMutation(
     (user) => {

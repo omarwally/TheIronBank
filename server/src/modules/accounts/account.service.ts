@@ -19,6 +19,9 @@ export class AccountService {
   async findAccounts(id: string): Promise<Account[]> {
     return  this.AccountModel.find({ userid: id }).exec();
   }
-
+  async CreateAccount(acc) {
+    const Account = await new this.AccountModel(acc);
+    return Account.save();
+  }
 
 }

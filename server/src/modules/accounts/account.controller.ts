@@ -1,7 +1,9 @@
-import { Controller, Get, Param, Request, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, Request, UseGuards , Post ,Body} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AccountService } from './account.service';
 import { User } from '@sp/schemas';
+import { AccountDocument } from 'src/schemas/account.schema';
+
 
 @Controller('account')
 export class AccountController {
@@ -18,5 +20,9 @@ export class AccountController {
     return this.accountService.findAccounts(userid);
   }
 
+  @Post("post")
+  public postAccount(@Body()account : AccountDocument){
+    return this.accountService.CreateAccount(account)
+  }
 
 }

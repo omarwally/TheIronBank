@@ -28,7 +28,7 @@ export class TransactionController {
     return this.transactionService.findAll();
   }
   @Get(":id")
-  find(@Param("id") id: number): any {
+  find(@Param("id") id: string): any {
     return this.transactionService.getTransaction(id);
   }
 }

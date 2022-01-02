@@ -8,7 +8,7 @@ import {
 } from "reactstrap";
 import { useState } from "react";
 import styles from "../styles/Home.module.css";
-import { useMutateRegisterUser, useFetchUser } from "../adapters/user.js"
+import { useMutateRegisterUser, useFetchUser, useMutateCreatAccount } from "../adapters/user.js"
 import { useMutation } from "react-query";
 
 
@@ -29,7 +29,7 @@ export default function Register() {
   const [usernameState, setUserNameState] = useState("");
   const [giuIDState, setgiuIDState] = useState("");
   const registerUser = useMutateRegisterUser()
-
+  const createAccount = useMutateCreatAccount();
 
   const validategiuEmail = (value) => {
     const emailRegex =
@@ -166,7 +166,9 @@ export default function Register() {
       console.log(username)
       console.log(phone)
       console.log(giuID)
+      const balance = 100
       registerUser.mutate({ giuEmail, password, confirmPassword, name, username, phone, giuID })
+      createAccount.mutate({ UserId: giuID, balance: balance })
     }
   };
 

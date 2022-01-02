@@ -26,14 +26,14 @@ function Dashboard() {
     const response = await apiService.get(`http://localhost:3000/account/${user}`);
     viewAccount(response.data)
   }, []);
+  console.log(account)
+  const result = account.filter((acc) => {
 
-  const result = account.filter((account) => {
-    return account.id == userr.giuId;
+    return acc.UserId == userr.giuID;
   });
 
 
 
-  console.log(result)
 
   return (
     <div className={styles.App}>
@@ -73,12 +73,12 @@ function Dashboard() {
       </div>
 
       <div >
-        <ul>
+        <ul className={styles.ul}>
           {result.map((item) => (
-            <li key={item._id}>
-
+            <a key={item._id} onClick={() => { localStorage.setItem("accountid", item._id) }} href="/transactions">
+              <h2></h2>
               your Acount : {item._id}  balance : {item.balance}
-            </li>
+            </a>
           ))}
         </ul>
       </div>

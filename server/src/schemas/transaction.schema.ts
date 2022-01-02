@@ -26,7 +26,7 @@ export class Transaction {
   date: Date;
 
   @Prop({ required: true })
-  transactionId: number;
+  transactionId: string;
 }
 
 export const TransactionSchema = SchemaFactory.createForClass(Transaction);

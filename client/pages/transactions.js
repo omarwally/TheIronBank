@@ -2,35 +2,77 @@ import React from "react";
 import ReactDom from "react-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Table } from "reactstrap";
+import styles from "../styles/Home.module.css";
 
 function Transaction() {
   const [transactions, setTransactions] = useState([]);
-  const [user, setUser] = useState([]);
 
   useEffect(() => {
-    const userr = JSON.parse(localStorage.getItem("user"));
-    axios.get("http://localhost:3000/transactions/list").then((response) => {
+    const accountid = localStorage.getItem("accountid");
+
+    axios.get(`http://localhost:3000/transactions/${accountid}`).then((response) => {
+
       const data = response.data;
+      console.log(data)
       setTransactions(data);
-      setUser(userr);
+      console.log(data)
+      localStorage.removeItem("accountid");
+
     });
+
   }, []);
-  const result = transactions.filter((obj) => {
-    return obj.creditorId === user.giuId;
-  });
+
+  // const results = [];
+  // const result = transactions.filter((obj) => {
+  //   if (obj.creditorId === user.giuID) {
+  //     results.push(obj)
+  //   }
+  //   return results
+  // });
+
+
+  const Thedata = transactions.map((trans, index) => {
+    return (
+      <tbody>
+        <tr key={trans._id}>
+          <td>{index}</td>
+          <td>{trans.creditorId}</td>
+          <td>{trans.debitorId}</td>
+
+          <td>{trans.amount > 0 ? "Deposit = $" : "Withdrawal = $"}
+            {trans.amount}</td>
+          <td>{trans.date}</td>
+          <td>{trans.transactionId}</td>
+        </tr>
+      </tbody>
+    )
+  })
 
   return (
-    <div className="Transactions">
+    <div   >
       <h1>Transactions</h1>
-      <ul>
-        {result.map((item) => (
-          <li key={item._id}>
-            {item.amount > 0 ? "Deposit = $" : "Withdrawal = $"}
-            {item.amount}
-          </li>
-        ))}
-      </ul>
-    </div>
+      <Table >
+
+        <thead>
+
+
+
+
+          < tr >
+            <th>#</th>
+            <th></th>
+            <th>creditorId</th>
+            <th>debitorId</th>
+            <th>amout</th>
+            <th>date</th>
+            <th>tracid</th>
+          </tr>
+        </thead>
+        {Thedata}
+
+      </Table>
+    </div >
   );
 }
 

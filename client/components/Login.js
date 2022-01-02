@@ -79,7 +79,11 @@ export default function Login() {
           />
         </FormGroup>
         <Button color="primary">Submit</Button>
+
       </Form>
+      <Button href="/register">
+        Register
+      </Button>
     </div>
   );
 }

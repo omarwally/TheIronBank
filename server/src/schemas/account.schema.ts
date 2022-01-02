@@ -7,7 +7,7 @@ export type AccountDocument = Account & Document;
 @Schema()
 export class Account {
   @Prop({ required: true })
-  id: string;
+  UserId: string;
 
   @Prop({ required: true })
   balance: string;
