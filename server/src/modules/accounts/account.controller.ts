@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Request, UseGuards , Post ,Body} from '@nestjs/common';
+import { Controller, Get , Param, Request, UseGuards , Post ,Body, Put} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AccountService } from './account.service';
 import { User } from '@sp/schemas';
@@ -15,6 +15,12 @@ export class AccountController {
   }
 
 
+  @Get("/acc/:userid")
+  GetAcc(@Param("userid") userid: string): any {
+    return this.accountService.findAccount(userid);
+  }
+
+
   @Get(":userid")
   GetAccount(@Param("userid") userid: string): any {
     return this.accountService.findAccounts(userid);
@@ -24,5 +30,17 @@ export class AccountController {
   public postAccount(@Body()account : AccountDocument){
     return this.accountService.CreateAccount(account)
   }
+
+  @Put("/:accountId")
+  updateAccount(
+    @Param('accountId') _id:string,
+    @Body('balance') balance:number
+  ){  
+   
+    return this.accountService.updateAccount(_id,balance)
+
+  }
+
+
 
 }

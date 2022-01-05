@@ -2,6 +2,7 @@ import { HttpException, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Transaction, TransactionDocument } from "@sp/schemas";
 import { Model } from "mongoose";
+import {Account,AccountSchema } from "@sp/schemas";
 
 @Injectable()
 export class TransactionService {
@@ -24,6 +25,8 @@ export class TransactionService {
     const transaction = await new this.TransactionModel(newTrans);
     return transaction.save();
   }
+
+ 
 
   findAll(): Promise<Transaction[]> {
     return this.TransactionModel.find().exec();
