@@ -8,6 +8,14 @@ import {
 } from "reactstrap";
 import { useState } from "react";
 import styles from "../styles/Home.module.css";
+<<<<<<< Updated upstream
+=======
+import { useMutateRegisterUser, useFetchUser, useMutateCreateAccount } from "../adapters/user.js"
+import { useMutation } from "react-query";
+
+
+>>>>>>> Stashed changes
+
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -16,6 +24,19 @@ export default function Register() {
   const [emailState, setEmailState] = useState("");
   const [passwordState, setPasswordState] = useState("");
   const [confirmPasswordState, setConfirmPasswordState] = useState("");
+<<<<<<< Updated upstream
+=======
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [username, setUserName] = useState("");
+  const [giuID, setgiuID] = useState("");
+  const [nameState, setNameState] = useState("");
+  const [phoneState, setPhoneState] = useState("");
+  const [usernameState, setUserNameState] = useState("");
+  const [giuIDState, setgiuIDState] = useState("");
+  const registerUser = useMutateRegisterUser()
+  const createAccount = useMutateCreateAccount();
+>>>>>>> Stashed changes
 
   const validateEmail = (value) => {
     const emailRegex =
