@@ -76,10 +76,10 @@ function Dashboard() {
         <ul className={styles.ul}>
           {result.map((item) => (
             <a key={item._id}
-              onClick={() => { localStorage.setItem("accountid", item._id), localStorage.setItem("balance", item.balance) }}
+              onClick={() => { localStorage.setItem("accountid", item.accId), localStorage.setItem("balance", item.balance) }}
               href="/transactions" >
               <h2></h2>
-              your Acount : {item._id}  balance : {item.balance}
+              your Acount : {item.accId}  balance : {item.balance}
             </a>
           ))}
         </ul>

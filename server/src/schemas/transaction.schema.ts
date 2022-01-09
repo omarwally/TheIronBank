@@ -14,10 +14,10 @@ export type TransactionDocument = Transaction & Document;
 @Schema()
 export class Transaction {
   @Prop({ required: true })
-  creditorId: number;
+  creditorId: string;
 
   @Prop({ required: true })
-  debitorId: number;
+  debitorId: string;
 
   @Prop({ required: true })
   amount: number;

@@ -60,7 +60,7 @@ function Transaction() {
   const validateAccount = (value) => {
 
     let toAccountIDstate;
-    if (value.length == 24) {
+    if (value.length == 12) {
       toAccountIDstate = "has-success";
     } else {
       toAccountIDstate = "has-danger";
@@ -109,10 +109,10 @@ function Transaction() {
 
           updateaccount.mutate({ accountId: accountId, balance: (parseInt(balance) - parseInt(Amount)) })
 
-          createTransaction.mutate({ creditorId: 1, debitorId: 1, amount: +Amount, date: moment().format("DD-MM-YYYY hh:mm:ss"), transactionId: accountId })
+          createTransaction.mutate({ creditorId: toAccountID, debitorId: accountId, amount: +Amount, date: moment().format("DD-MM-YYYY hh:mm:ss"), transactionId: accountId })
 
 
-          createTransaction.mutate({ creditorId: 1, debitorId: 1, amount: +Amount, date: moment().format("DD-MM-YYYY hh:mm:ss"), transactionId: toAccountID })
+          createTransaction.mutate({ creditorId: toAccountID, debitorId: accountId, amount: +Amount, date: moment().format("DD-MM-YYYY hh:mm:ss"), transactionId: toAccountID })
           console.log(toBalance)
           const newbalance = (parseInt(data.balance) + parseInt(Amount))
           console.log(toAccountID)
@@ -146,7 +146,7 @@ function Transaction() {
           console.log(balance)
 
           updateaccount.mutate({ accountId: accountId, balance: balance })
-          createTransaction.mutate({ creditorId: 1, debitorId: 1, amount: -Amount, date: moment().format("DD-MM-YYYY hh:mm:ss"), transactionId: accountId })
+          createTransaction.mutate({ creditorId: accountId, debitorId: accountId, amount: -Amount, date: moment().format("DD-MM-YYYY hh:mm:ss"), transactionId: accountId })
 
 
         } else {
@@ -194,7 +194,7 @@ function Transaction() {
           <td>{trans.amount > 0 ? "Deposit = $" : "Withdrawal = $"}
             {trans.amount}</td>
           <td>{trans.date}</td>
-          <td>{trans.transactionId}</td>
+          {/* <td>{trans.transactionId}</td> */}
         </tr>
       </tbody>
     )
@@ -219,7 +219,7 @@ function Transaction() {
             <th>debitorId</th>
             <th>amout</th>
             <th>date</th>
-            <th>tracid</th>
+            {/* <th>tracid</th> */}
           </tr>
         </thead>
         {Thedata}

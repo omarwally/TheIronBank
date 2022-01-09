@@ -16,7 +16,7 @@ export class AccountService {
   }
 
   async findAccount(id:string): Promise<Account> {
-    return this.AccountModel.findById(id).exec();
+    return this.AccountModel.findOne({accId:id}).exec();
     
 
   }
@@ -35,8 +35,9 @@ export class AccountService {
   
    async updateAccount(id: string, balance:number): Promise<Account> {
     let Account;
+   
     try {
-      Account = await this.AccountModel.findById(id).exec();
+      Account = await this.AccountModel.findOne({accId:id}).exec();
       Account.balance=balance;
     } catch (error) {
       throw new NotFoundException('Could not find Account.');

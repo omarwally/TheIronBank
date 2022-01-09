@@ -168,7 +168,7 @@ export default function Register() {
       console.log(giuID)
       const balance = 100
       registerUser.mutate({ giuEmail, password, confirmPassword, name, username, phone, giuID })
-      createAccount.mutate({ UserId: giuID, balance: balance })
+      createAccount.mutate({ UserId: giuID, balance: balance, accId: Math.floor(10000000 + Math.random() * 900000000000) })
     }
   };
 

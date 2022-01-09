@@ -33,11 +33,11 @@ export class AccountController {
 
   @Put("/:accountId")
   updateAccount(
-    @Param('accountId') _id:string,
+    @Param('accountId') accId:string,
     @Body('balance') balance:number
   ){  
    
-    return this.accountService.updateAccount(_id,balance)
+    return this.accountService.updateAccount(accId,balance)
 
   }
 

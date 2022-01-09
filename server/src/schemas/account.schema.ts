@@ -10,6 +10,10 @@ export class Account {
   UserId: string;
 
   @Prop({ required: true })
+  accId: string;
+  
+
+  @Prop({ required: true })
   balance: string;
 
 }
