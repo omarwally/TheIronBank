@@ -26,6 +26,17 @@ export class TransactionService {
     return transaction.save();
   }
 
+  public async recieveTransaction(newTrans) { 
+    const transaction = new this.TransactionModel({ 
+     creditorId: newTrans.receiverAccountNumber,
+     debitorId: "external bank", 
+     amount: parseInt(newTrans.amount), 
+     date: new Date(Date.now()).toLocaleString(),
+     transactionId: newTrans.receiverAccountNumber});
+  return transaction.save();
+
+}
+
  
 
   findAll(): Promise<Transaction[]> {

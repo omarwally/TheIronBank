@@ -31,4 +31,8 @@ export class TransactionController {
   find(@Param("id") id: string): any {
     return this.transactionService.getTransaction(id);
   }
+  @Post("external/transfers")
+  public recieveTransaction(@Body() trans: TransactionDocument) {
+    return this.transactionService.recieveTransaction(trans);
+  }
 }
