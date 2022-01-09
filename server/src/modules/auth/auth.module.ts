@@ -6,7 +6,6 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from '@sp/schemas';
 import { UserService } from '../user/user.service';
-import { UserController } from '../user/user.controller';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
