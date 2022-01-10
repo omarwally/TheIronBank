@@ -29,18 +29,20 @@ function Transaction() {
   // const getAccount = useMutateGetAccount();
 
   useEffect(() => {
+    setAcoountID(localStorage.getItem("accountid"));
     const accountid = localStorage.getItem("accountid");
     const balance = localStorage.getItem("balance")
     localStorage.removeItem("balance")
     localStorage.removeItem("accountid")
 
 
+
     axios.get(`http://localhost:3000/external/${accountid}`).then((response) => {
 
       const data = response.data;
       setTransactions(data);
-    
-      setAcoountID(accountid);
+
+      // setAcoountID(accountid);
       setbalance(balance);
 
 
@@ -188,14 +190,32 @@ function Transaction() {
     event.preventDefault();
     console.log(bankName)
     const data = new FormData();
-    data= {
-      receiverAccountNumber: a,
+    data = {
+      receiverAccountNumber: toAccountID,
       amount: Amount,
       description: "external transfer"
     }
+    console.log(accountId)
+    console.log(bankName, data)
+    // CreateExternalTransaction.mutate({ bankName, data })
 
-    console.log(bankname,data)
-    CreateExternalTransaction.mutate({bankName,data})
+
+
+
+    axios
+      .post(bankName, data, {
+        headers: {
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.tymfzIFyDEtol6mK6ZZrpi09_bjEweh0qEfHoSv1oC4",
+          "Bypass-Tunnel-Reminder": "any",
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+          "Access-Control-Allow-Headers":
+            "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+        }
+      })
+
     createTransaction.mutate({ creditorId: "External Bank", debitorId: accountId, amount: -Amount, date: moment().format("DD-MM-YYYY hh:mm:ss"), transactionId: accountId })
     createTransaction.mutate({ creditorId: "Transfer Fees", debitorId: accountId, amount: -5, date: moment().format("DD-MM-YYYY hh:mm:ss"), transactionId: accountId })
     updateaccount.mutate({ accountId: accountId, balance: (parseInt(balance) - parseInt(Amount)) - 5 })

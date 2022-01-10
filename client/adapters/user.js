@@ -87,7 +87,7 @@ export function useMutateupdateAccount() {
     {
       // When mutate is called:
       onSuccess: (responseData) => {
-        window.location.replace("http://localhost:3001")
+        //window.location.replace("http://localhost:3001")
 
 
       },
