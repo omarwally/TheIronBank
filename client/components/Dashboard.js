@@ -23,7 +23,7 @@ function Dashboard() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     viewname(user)
-    const response = await apiService.get(`http://localhost:3000/account/${user}`);
+    const response = await apiService.get(`http://localhost:3001/account/${user}`);
     viewAccount(response.data)
   }, []);
   console.log(account)

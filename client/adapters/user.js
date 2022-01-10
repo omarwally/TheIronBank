@@ -14,7 +14,7 @@ export function useMutateLoginUser() {
       const data = new FormData();
       data.append("email", user.email ? user.email : "");
       data.append("password", user?.password);
-      return axios.post("http://localhost:3000/auth/login", user)
+      return axios.post("http://localhost:3001/auth/login", user)
     },
     {
       // When mutate is called:
@@ -23,7 +23,7 @@ export function useMutateLoginUser() {
         localStorage.setItem("jwt", responseData.data.token)
         localStorage.setItem("user", JSON.stringify(responseData.data._doc))
 
-        window.location.replace("http://localhost:3001")
+        window.location.replace("http://localhost:3000")
       },
       onError: (e) => console.log(e.message),
     }
@@ -33,7 +33,7 @@ export function useMutateCreateAccount() {
   return useMutation(
     (acc) => {
 
-      return axios.post('http://localhost:3000/account/post', acc);
+      return axios.post('http://localhost:3001/account/post', acc);
     },
     {
       // When mutate is called:
@@ -82,12 +82,12 @@ export function useMutateCreateExternalTransaction() {
 export function useMutateupdateAccount() {
   return useMutation(
     (acc) => {
-      return axios.put(`http://localhost:3000/account/${acc.accountId}`, acc);
+      return axios.put(`http://localhost:3001/account/${acc.accountId}`, acc);
     },
     {
       // When mutate is called:
       onSuccess: (responseData) => {
-        //window.location.replace("http://localhost:3001")
+        window.location.replace("http://localhost:3000")
 
 
       },
@@ -102,7 +102,7 @@ export function useMutateCreateTransaction() {
   return useMutation(
     (Transaction) => {
 
-      return axios.post('http://localhost:3000/external/post', Transaction);
+      return axios.post('http://localhost:3001/external/post', Transaction);
     },
     {
       // When mutate is called:
@@ -117,7 +117,7 @@ export function useMutateCreateTransaction() {
 
 
 export function usegetTransactions(transactionId) {
-  return axios.get(`http://localhost:3000/external/${userId}`).then(({ data }) => data)
+  return axios.get(`http://localhost:3001/external/${userId}`).then(({ data }) => data)
 
 }
 
@@ -143,13 +143,13 @@ export function usegetTransactions(transactionId) {
 export function useMutateRegisterUser() {
   return useMutation(
     (user) => {
-      return apiService.post(`http://localhost:3000/user/post`, user);
+      return apiService.post(`http://localhost:3001/user/post`, user);
     },
     {
       // When mutate is called:
       onSuccess: (responseData) => {
         // Redirect to login page
-        window.location.replace("http://localhost:3001");
+        window.location.replace("http://localhost:3000");
       },
       onError: (e) => console.log(e.message),
     }

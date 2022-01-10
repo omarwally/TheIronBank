@@ -37,7 +37,7 @@ function Transaction() {
 
 
 
-    axios.get(`http://localhost:3000/external/${accountid}`).then((response) => {
+    axios.get(`http://localhost:3001/external/${accountid}`).then((response) => {
 
       const data = response.data;
       setTransactions(data);
@@ -157,7 +157,7 @@ function Transaction() {
 
       setTimeout(() => {
 
-        return axios.get(`http://localhost:3000/account/acc/${toAccountID}`).then((response) => {
+        return axios.get(`http://localhost:3001/account/acc/${toAccountID}`).then((response) => {
           const data = response.data;
           console.log(data.balance)
           setTobalance(data.balance)
