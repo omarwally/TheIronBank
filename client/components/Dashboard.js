@@ -51,9 +51,7 @@ function Dashboard() {
               navbar
             >
               <NavItem>
-                <NavLink href="/transactions/">
-                  Transactions
-                </NavLink>
+
               </NavItem>
             </Nav>
             < NavItem>

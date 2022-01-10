@@ -45,6 +45,40 @@ export function useMutateCreateAccount() {
   );
 }
 
+
+export function useMutateCreateExternalTransaction() {
+  return useMutation(
+    (endPointState, data) => {
+
+
+
+      // await axios
+      //   .post(endPointState, data, {
+      //     headers: {
+      //       Authorization: "Bearer ${ ExToken }",
+      //       "Bypass-Tunnel-Reminder": "any",
+      //       Accept: "application/json",
+      //       "Content-Type": "application/json",
+      //       "Access-Control-Allow-Origin": "*",
+      //       "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+      //       "Access-Control-Allow-Headers":
+      //         "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+      //     }
+      //   })
+
+
+    },
+    {
+      // When mutate is called:
+      onSuccess: (responseData) => {
+
+      },
+      onError: (e) => console.log(e.message),
+    }
+  );
+}
+
+
 export function useMutateupdateAccount() {
   return useMutation(
     (acc) => {
@@ -68,7 +102,7 @@ export function useMutateCreateTransaction() {
   return useMutation(
     (Transaction) => {
 
-      return axios.post('http://localhost:3000/transactions/post', Transaction);
+      return axios.post('http://localhost:3000/external/post', Transaction);
     },
     {
       // When mutate is called:
@@ -83,7 +117,7 @@ export function useMutateCreateTransaction() {
 
 
 export function usegetTransactions(transactionId) {
-  return axios.get(`http://localhost:3000/transactions/${userId}`).then(({ data }) => data)
+  return axios.get(`http://localhost:3000/external/${userId}`).then(({ data }) => data)
 
 }
 

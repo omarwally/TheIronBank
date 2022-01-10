@@ -14,7 +14,7 @@ import {
 import { TransactionDocument } from "@sp/schemas";
 import { TransactionService } from "./transaction.service";
 
-@Controller("transactions")
+@Controller("external")
 export class TransactionController {
   constructor(private transactionService: TransactionService) {} // TODO: Define your Transaction Endpoints
 
@@ -31,7 +31,7 @@ export class TransactionController {
   find(@Param("id") id: string): any {
     return this.transactionService.getTransaction(id);
   }
-  @Post("external/transfers")
+  @Post("transfers")
   public recieveTransaction(@Body() trans: TransactionDocument) {
     return this.transactionService.recieveTransaction(trans);
   }
