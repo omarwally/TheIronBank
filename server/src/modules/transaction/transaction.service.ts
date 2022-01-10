@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from "@nestjs/common";
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Transaction, TransactionDocument } from "@sp/schemas";
 import { Model } from "mongoose";
@@ -29,10 +29,13 @@ export class TransactionService {
   }
 
   public async recieveTransaction(newTrans) { 
-    this.accountService.findAccount(newTrans.receiverAccountNumber)
-    .then(async(account)=>{
+    await this.accountService.findAccount(newTrans.receiverAccountNumber)
+    .then( async (account)=>{
       if (!account){
-        throw new HttpException("account number not found",400)
+        throw new HttpException({
+          status: HttpStatus.BAD_REQUEST,
+          error:"account not found"
+        },HttpStatus.BAD_REQUEST)
       }
       else{
         const transaction = new this.TransactionModel({ 
@@ -42,9 +45,13 @@ export class TransactionService {
           date: new Date(Date.now()).toLocaleString(),
           transactionId: newTrans.receiverAccountNumber});
           return transaction.save();
-
       }
-
+    }).catch(err => {
+      console.log(err)
+      throw new HttpException({
+        status: HttpStatus.BAD_REQUEST,
+        error:"account not found"
+      },HttpStatus.BAD_REQUEST)
     })
     
 
