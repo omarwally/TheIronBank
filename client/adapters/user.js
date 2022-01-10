@@ -48,23 +48,23 @@ export function useMutateCreateAccount() {
 
 export function useMutateCreateExternalTransaction() {
   return useMutation(
-    (endPointState, data) => {
+    async (endPointState, data) => {
 
 
 
-      // await axios
-      //   .post(endPointState, data, {
-      //     headers: {
-      //       Authorization: "Bearer ${ ExToken }",
-      //       "Bypass-Tunnel-Reminder": "any",
-      //       Accept: "application/json",
-      //       "Content-Type": "application/json",
-      //       "Access-Control-Allow-Origin": "*",
-      //       "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-      //       "Access-Control-Allow-Headers":
-      //         "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
-      //     }
-      //   })
+      await axios
+        .post(endPointState, data, {
+          headers: {
+            Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJTb25nIjoiV2hlcmVJc015SnV1bD8iLCJOYW1lIjoiTGlsX01hcmlrbyIsIkxpbmsiOiJodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PXEtWEg5MldpZTBVJmFiX2NoYW5uZWw9TG9maUNvd2JveSJ9.1i5RDEb4KW0wkDMXmcaqj5keueKoM8jxERLPhbav8F0",
+            "Bypass-Tunnel-Reminder": "any",
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+            "Access-Control-Allow-Headers":
+              "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With",
+          }
+        })
 
 
     },

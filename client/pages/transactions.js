@@ -39,10 +39,12 @@ function Transaction() {
 
       const data = response.data;
       setTransactions(data);
-      console.log(accountId)
-
+    
       setAcoountID(accountid);
       setbalance(balance);
+
+
+      console.log(accountId)
     });
 
 
@@ -64,7 +66,7 @@ function Transaction() {
     const NumberRegex = /^[0-9]+$/;
 
     let Amountstate;
-    if (NumberRegex.test(value) && value <= 50 && (value + 5) >= balance) {
+    if (NumberRegex.test(value) && value < 51 && (value + 5) <= balance) {
       Amountstate = "has-success";
     } else {
       Amountstate = "has-danger";
@@ -82,6 +84,7 @@ function Transaction() {
     }
     settoAccountIDstate(toAccountIDstate);
   };
+
 
 
 
@@ -184,17 +187,18 @@ function Transaction() {
   const handleExternalTransferSubmit = (event) => {
     event.preventDefault();
     console.log(bankName)
+    const data = new FormData();
+    data= {
+      receiverAccountNumber: a,
+      amount: Amount,
+      description: "external transfer"
+    }
 
-
-    CreateExternalTransaction.mutate({})
-
+    console.log(bankname,data)
+    CreateExternalTransaction.mutate({bankName,data})
     createTransaction.mutate({ creditorId: "External Bank", debitorId: accountId, amount: -Amount, date: moment().format("DD-MM-YYYY hh:mm:ss"), transactionId: accountId })
     createTransaction.mutate({ creditorId: "Transfer Fees", debitorId: accountId, amount: -5, date: moment().format("DD-MM-YYYY hh:mm:ss"), transactionId: accountId })
     updateaccount.mutate({ accountId: accountId, balance: (parseInt(balance) - parseInt(Amount)) - 5 })
-
-
-
-
 
   }
 
