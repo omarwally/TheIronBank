@@ -8,11 +8,15 @@ import {
 } from "reactstrap";
 import { useState } from "react";
 import styles from "../styles/Home.module.css";
+import adapter from "../adapters/user.js"
+import { useMutateLoginUser } from "../adapters/user"
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailState, setEmailState] = useState("");
+  const userLoginMutation = useMutateLoginUser();
 
   const validateEmail = (value) => {
     const emailRegex =
@@ -39,7 +43,7 @@ export default function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Call User Login Adapter
+    const test = userLoginMutation.mutate({ email: email, password: password })
   };
 
   return (
@@ -75,7 +79,11 @@ export default function Login() {
           />
         </FormGroup>
         <Button color="primary">Submit</Button>
+
       </Form>
+      <Button href="/register">
+        Register
+      </Button>
     </div>
   );
 }
